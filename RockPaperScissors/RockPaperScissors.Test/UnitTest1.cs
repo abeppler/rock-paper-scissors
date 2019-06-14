@@ -166,6 +166,48 @@ namespace RockPaperScissors.Test
             winnerRound2.PlayerName.Should().Be("Player2");
         }
 
+        [Fact]
+        public void RpsGameWinner_PaperShouldBeatRock()
+        {
+            //Arrange
+            var round1 = new Round
+            {
+                Game1 = new Game()
+                {
+                    PlayerName = "Player1",
+                    Strategy = "P"
+                },
+                Game2 = new Game()
+                {
+                    PlayerName = "Player2",
+                    Strategy = "R"
+                }
+            };
+
+            var round2 = new Round
+            {
+                Game1 = new Game()
+                {
+                    PlayerName = "Player1",
+                    Strategy = "R"
+                },
+                Game2 = new Game()
+                {
+                    PlayerName = "Player2",
+                    Strategy = "P"
+                }
+            };
+
+            //Act
+            var winnerRound1 = RpsGameWinner(round1);
+            var winnerRound2 = RpsGameWinner(round2);
+
+            //Assert
+            winnerRound1.PlayerName.Should().Be("Player1");
+            winnerRound2.PlayerName.Should().Be("Player2");
+        }
+
+
         private Game RpsGameWinner(Round round)
         {
             if ((round.Game1 == null) || (round.Game2 == null))
@@ -189,6 +231,12 @@ namespace RockPaperScissors.Test
                 return round.Game1;
 
             if ((round.Game2.Strategy == "S") && (round.Game1.Strategy == "P"))
+                return round.Game2;
+
+            if ((round.Game1.Strategy == "P") && (round.Game2.Strategy == "R"))
+                return round.Game1;
+
+            if ((round.Game2.Strategy == "P") && (round.Game1.Strategy == "R"))
                 return round.Game2;
 
             throw new NotImplementedException();
