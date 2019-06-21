@@ -224,22 +224,13 @@ namespace RockPaperScissors.Test
             if ((round.Game1.Strategy == "R") && (round.Game2.Strategy == "S"))
                 return round.Game1;
 
-            if ((round.Game2.Strategy == "R") && (round.Game1.Strategy == "S"))
-                return round.Game2;
+            if ((round.Game1.Strategy == "P") && (round.Game2.Strategy == "R"))
+                return round.Game1;
 
             if ((round.Game1.Strategy == "S") && (round.Game2.Strategy == "P"))
                 return round.Game1;
 
-            if ((round.Game2.Strategy == "S") && (round.Game1.Strategy == "P"))
-                return round.Game2;
-
-            if ((round.Game1.Strategy == "P") && (round.Game2.Strategy == "R"))
-                return round.Game1;
-
-            if ((round.Game2.Strategy == "P") && (round.Game1.Strategy == "R"))
-                return round.Game2;
-
-            throw new NotImplementedException();
+            return round.Game2;
         }
     }
 }
